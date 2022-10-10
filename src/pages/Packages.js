@@ -35,7 +35,7 @@ import { FormProvider, RHFTextField } from '../components/hook-form';
 import axios from '../utils/axios';
 // material
 
-export default function AddPatient() {
+export default function Packages() {
   const LoginSchema = Yup.object().shape({
     pid: Yup.string().required('Email is required'),
     pkgName: Yup.string().required('Package Name is required'),
@@ -74,32 +74,10 @@ export default function AddPatient() {
 
   return (
     <>
-    <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
-      <Grid container xs={6} spacing={3}>
-        <Grid item xs={12} spacing={3} padding={3}>
-          <Typography variant="h3" gutterBottom>
-            Add a Package
-          </Typography>
-          <RHFTextField
-            // disabled
-            required
-            name="pid"
-            label="PID"
-            fullWidth
-            autoComplete="given-name"
-            variant="standard"
-          />
-          <RHFTextField required  name="pkgName" label="Package Name" fullWidth autoComplete="given-name" variant="standard" />
-          {/* <TextField type="date" fullWidth id="date" label="Package Dispatched Date"  variant="standard" /> */}
-          
-          
-        </Grid>
-        <LoadingButton fullWidth size="large" type="submit" variant="contained" loading={isSubmitting}>
-            Save Package Details
-        </LoadingButton>
+     <Grid container xs={6} spacing={3}>
+        
+       
       </Grid>
-      
-      </FormProvider>
     </>
   );
 }
