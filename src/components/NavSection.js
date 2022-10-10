@@ -155,15 +155,6 @@ export default function NavSection({ navConfig, ...other }) {
           
           <NavItem key={item.title} item={item} active={match} />
         ))}
-        {/* show only in ATTENDANT logic */}
-        {
-            logindata?.userType === 'ATTENDANT' ?
-            <NavItem key={"Add Patient"} item={{title:"Add Patient",path: '/dashboard/addPatient',icon: getIcon('eva:people-fill')}} active={match} />
-      
-            :
-            ""
-        }
-        
       </List>
     </Box>
   );

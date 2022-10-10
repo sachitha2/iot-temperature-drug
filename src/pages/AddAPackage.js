@@ -124,10 +124,10 @@ export default function AddPatient() {
   return (
     <>
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
-      <Grid container spacing={3}>
-        <Grid item xs={10} sm={6}>
+      <Grid container xs={6} spacing={3}>
+        <Grid item xs={12} spacing={3} padding={3}>
           <Typography variant="h3" gutterBottom>
-            General Information
+            Add a Package
           </Typography>
           <TextField
             disabled
@@ -141,191 +141,14 @@ export default function AddPatient() {
           />
           <TextField required id="nic" name="nic" label="NIC" fullWidth autoComplete="given-name" variant="standard" />
           <TextField type="date" fullWidth id="date" variant="standard" />
-          <TextField
-            required
-            id="title"
-            name="title"
-            label="Title"
-            fullWidth
-            autoComplete="given-name"
-            variant="standard"
-          />
-          <TextField
-            required
-            id="firstname"
-            name="firstname"
-            label="First Name"
-            fullWidth
-            autoComplete="given-name"
-            variant="standard"
-          />
-          <TextField
-            required
-            id="middlename"
-            name="middlename"
-            label="Middle Name"
-            fullWidth
-            autoComplete="given-name"
-            variant="standard"
-          />
-          <TextField
-            required
-            id="lastname"
-            name="lastname"
-            label="Last name"
-            fullWidth
-            autoComplete="given-name"
-            variant="standard"
-          />
-          <TextField
-            required
-            id="gender"
-            name="gender"
-            label="Gender"
-            fullWidth
-            autoComplete="given-name"
-            variant="standard"
-          />
-          <TextField
-            required
-            id="occupation"
-            name="occupation"
-            label="Occupation"
-            fullWidth
-            autoComplete="given-name"
-            variant="standard"
-          />
-          <TextField
-            required
-            id="maritalstatus"
-            name="maritalstatus"
-            label="Marital Status"
-            fullWidth
-            autoComplete="given-name"
-            variant="standard"
-          />
-          <TextField
-            required
-            id="children"
-            name="children"
-            label="Children"
-            fullWidth
-            autoComplete="given-name"
-            variant="standard"
-          />
-          <TextField
-            required
-            id="religion"
-            name="religion"
-            label="Religion"
-            fullWidth
-            autoComplete="given-name"
-            variant="standard"
-          />
-          <TextField
-            required
-            id="nationality"
-            name="nationality"
-            label="Nationality"
-            fullWidth
-            autoComplete="given-name"
-            variant="standard"
-          />
-          <TextField
-            required
-            id="race"
-            name="race"
-            label="Race"
-            fullWidth
-            autoComplete="given-name"
-            variant="standard"
-          />
-          <TextField
-            required
-            id="languages"
-            name="languages"
-            label="Languages"
-            fullWidth
-            autoComplete="given-name"
-            variant="standard"
-          />
+          
+          
         </Grid>
-        <Grid item xs={10} sm={6}>
-          <Typography variant="h3" gutterBottom>
-            Address and Contact Details
-          </Typography>
-          <TextField
-            type="text"
-            multiline
-            rows={3}
-            fullWidth
-            id="address"
-            name="address"
-            label="Address"
-            variant="outlined"
-          />
-          <TextField
-            required
-            id="phone"
-            name="phone"
-            label="Phone"
-            fullWidth
-            autoComplete="given-name"
-            variant="standard"
-          />
-          <TextField
-            required
-            id="phone2"
-            name="phone2"
-            label="Phone2"
-            fullWidth
-            autoComplete="given-name"
-            variant="standard"
-          />
-          <TextField
-            required
-            id="email"
-            name="email"
-            label="Email"
-            fullWidth
-            autoComplete="given-name"
-            variant="standard"
-          />
-          <Typography variant="h3" gutterBottom>
-            Emergency Contact
-          </Typography>
-          <TextField
-            required
-            id="emergencyName"
-            name="emergencyName"
-            label="Emergency Name"
-            fullWidth
-            autoComplete="given-name"
-            variant="standard"
-          />
-          <TextField
-            required
-            id="relationShip"
-            name="relationShip"
-            label="Relationship"
-            fullWidth
-            autoComplete="given-name"
-            variant="standard"
-          />
-          <TextField
-            required
-            id="emergencyContactNo"
-            name="emergencyContactNo"
-            label="Emergency Contact No"
-            fullWidth
-            autoComplete="given-name"
-            variant="standard"
-          />
-        </Grid>
+        <LoadingButton fullWidth size="large" type="submit" variant="contained" loading={isSubmitting}>
+            Save Package Details
+        </LoadingButton>
       </Grid>
-      <LoadingButton fullWidth size="large" type="submit" variant="contained" loading={isSubmitting}>
-        Save Patient
-      </LoadingButton>
+      
       </FormProvider>
     </>
   );
