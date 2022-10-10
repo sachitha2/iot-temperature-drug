@@ -19,6 +19,7 @@ export default function Router() {
       children: [
         // { path: 'demographic', element: <Demographics /> },
         { path: 'addAPackage', element: <AddAPackage /> },
+        { path: 'packages', element: <AddAPackage /> },
         
       ],
     },

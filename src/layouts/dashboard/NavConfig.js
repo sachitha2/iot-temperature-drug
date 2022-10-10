@@ -11,6 +11,11 @@ const navConfig = [
     path: '/dashboard/addAPackage',
     icon: getIcon('eva:people-fill'),
   },
+  {
+    title: 'Packages',
+    path: '/dashboard/packages',
+    icon: getIcon('eva:people-fill'),
+  },
   
   // {
   //   title: 'Demographic',
