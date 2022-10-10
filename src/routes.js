@@ -19,7 +19,7 @@ import Register from './pages/Register';
 import Products from './pages/Products';
 import DashboardApp from './pages/DashboardApp';
 import LoginStage from './sections/auth/LoginStage';
-import AddPatient from './pages/AddPatient';
+import AddAPackage from './pages/AddAPackage';
 
 // ----------------------------------------------------------------------
 
@@ -30,7 +30,7 @@ export default function Router() {
       element: <DashboardLayout />,
       children: [
         // { path: 'demographic', element: <Demographics /> },
-        { path: 'addPatient', element: <AddPatient /> },
+        { path: 'addAPackage', element: <AddAPackage /> },
         
       ],
     },
