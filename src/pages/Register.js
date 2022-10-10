@@ -2,6 +2,8 @@ import { Link as RouterLink } from 'react-router-dom';
 // @mui
 import { styled } from '@mui/material/styles';
 import { Card, Link, Container, Typography } from '@mui/material';
+
+
 // hooks
 import useResponsive from '../hooks/useResponsive';
 // components
@@ -9,7 +11,7 @@ import Page from '../components/Page';
 import Logo from '../components/Logo';
 // sections
 import { RegisterForm } from '../sections/auth/register';
-import { auth } from '../firebase.js'
+
 import AuthSocial from '../sections/auth/AuthSocial';
 
 // ----------------------------------------------------------------------

@@ -1,6 +1,11 @@
 import * as Yup from 'yup';
 import { useState } from 'react';
+import {useAtom} from 'jotai';
 import { useNavigate } from 'react-router-dom';
+import {
+  createUserWithEmailAndPassword,
+} from "firebase/auth";
+import { AUTH } from "../../../firebase";
 // form
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -10,7 +15,8 @@ import { LoadingButton } from '@mui/lab';
 // components
 import Iconify from '../../../components/Iconify';
 import { FormProvider, RHFTextField } from '../../../components/hook-form';
-
+// eslint-disable-next-line import/named
+import {loginData} from '../../../App'
 // ----------------------------------------------------------------------
 
 export default function RegisterForm() {
@@ -41,9 +47,23 @@ export default function RegisterForm() {
     handleSubmit,
     formState: { isSubmitting },
   } = methods;
-
-  const onSubmit = async () => {
-    navigate('/dashboard', { replace: true });
+  const [logindata,setLoginData] = useAtom(loginData);
+  const onSubmit = async (values) => {
+    alert('on submit')
+    
+    createUserWithEmailAndPassword(AUTH, values.email, values.password)
+      .then((userCredential) => {
+        // Signed in 
+        navigate('/dashboard', { replace: true });
+        console.log(userCredential);
+        const logData  = {id:userCredential.user.id,token:userCredential.user.id,userType:'ADMIN'}
+        setLoginData(logData)
+        // const user = userCredential.user;
+      })
+      .catch((error) => {
+        alert(error.message)
+      });
+    
   };
 
   return (
