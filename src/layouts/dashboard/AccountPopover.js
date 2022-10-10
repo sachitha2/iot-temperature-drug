@@ -30,7 +30,7 @@ export default function AccountPopover() {
     setOpen(null);
     setLoginData(null)
     setPatientOriId(null)
-    navigate('/login_stage', { replace: true });
+    navigate('/login', { replace: true });
   };
 
   
