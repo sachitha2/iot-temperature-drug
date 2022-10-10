@@ -9,6 +9,7 @@ import Page from '../components/Page';
 import Logo from '../components/Logo';
 // sections
 import { RegisterForm } from '../sections/auth/register';
+import { auth } from '../firebase.js'
 import AuthSocial from '../sections/auth/AuthSocial';
 
 // ----------------------------------------------------------------------
