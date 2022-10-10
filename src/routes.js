@@ -78,7 +78,6 @@ export default function Router() {
         { path: '/', element: <Navigate to="/dashboard/doctor" /> },
         { path: 'login', element: <Login /> },
         { path: 'patient_login', element: <PatientLogin /> },
-        { path: 'login_stage', element: <LoginStage/> },
         { path: 'register', element: <Register/> },
         { path: '404', element: <NotFound /> },
         { path: '*', element: <Navigate to="/404" /> },
