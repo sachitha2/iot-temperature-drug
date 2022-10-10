@@ -130,17 +130,17 @@ export default function AddPatient() {
             Add a Package
           </Typography>
           <TextField
-            disabled
+            // disabled
             required
-            id="phid"
-            name="phid"
-            label="PHID"
+            id="pid"
+            name="Package ID"
+            label="PID"
             fullWidth
             autoComplete="given-name"
             variant="standard"
           />
-          <TextField required id="nic" name="nic" label="NIC" fullWidth autoComplete="given-name" variant="standard" />
-          <TextField type="date" fullWidth id="date" variant="standard" />
+          <TextField required id="nic" name="nic" label="Package Name" fullWidth autoComplete="given-name" variant="standard" />
+          <TextField type="date" fullWidth id="date" label="Package Dispatched Date"  variant="standard" />
           
           
         </Grid>
