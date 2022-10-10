@@ -29,41 +29,19 @@ import {
   InputAdornment,
 } from '@mui/material';
 import Iconify from '../components/Iconify';
-import { FormProvider, RHFTextField, RHFCheckbox } from '../components/hook-form';
-import { loginData } from '../App';
+import { FormProvider, RHFTextField } from '../components/hook-form';
 import axios from '../utils/axios';
 // material
 
 export default function AddPatient() {
-  const [logindata,setLoginData] = useAtom(loginData);
   const LoginSchema = Yup.object().shape({
-    email: Yup.string().email('Email must be a valid email address').required('Email is required'),
-    password: Yup.string().required('Password is required'),
+    pid: Yup.string().required('Email is required'),
+    pkgName: Yup.string().required('Package Name is required'),
   });
 
   const defaultValues = {
-    nic: '',
-    title: '',
-    dob: '',
-    firstName: '',
-    middleName: '',
-    lastName: '',
-    email: '',
-    maritalStatus: '',
-    gender: '',
-    religion: '',
-    nationality: '',
-    childrenCount: 0,
-    race: '',
-    languages: '',
-    address: '',
-    occupation: '',
-    contactNo: '',
-    secondaryContactNo: '',
-    emergencyName: '',
-    relationShip: '',
-    emergencyContactNo: '',
-    remember: true,
+    pid: '',
+    pkgName:''
   };
 
   const methods = useForm({
@@ -75,50 +53,12 @@ export default function AddPatient() {
     handleSubmit,
     formState: { isSubmitting },
   } = methods;
-  const [patientId, setPatientId] = useAtom(loginData);
-  const [navId, setNavId] = useState('');
   const onSubmit = async (values) => {
+
+    alert('helloo')
     // TODO axios here
     console.log(values);
-    try {
-      const response = await axios.post(`auth/register/`, {
-        nic: values.nic,
-        title: values.title,
-        dob: values.dob,
-        firstName: values.firstname,
-        middleName: values.middlename,
-        lastName: values.lastname,
-        email: values.email,
-        maritalStatus: values.maritalStatus,
-        gender: values.gender,
-        religion: values.religion,
-        nationality: values.nationality,
-        childrenCount: values.childrenCount,
-        race: values.race,
-        languages: values.languages,
-        address: values.address,
-        occupation: values.occupation,
-        contactNo: values.contactNo,
-        secondaryContactNo: values.secondaryContactNo,
-        emergencyName: values.emergencyName,
-        relationShip: values.relationShip,
-        emergencyContactNo: values.emergencyContactNo,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${logindata.token}`
-        }
-      }
-      );
-
-      console.log(response.data);
-      // setPatientId(response.data);
-      const test = localStorage.getItem('Doctor');
-      // navigate(`/dashboard/${test}`, { replace: true });
-    } catch (e) {
-      console.log(e);
-      alert(e);
-    }
+    
   };
 
   return (
@@ -129,18 +69,17 @@ export default function AddPatient() {
           <Typography variant="h3" gutterBottom>
             Add a Package
           </Typography>
-          <TextField
+          <RHFTextField
             // disabled
             required
-            id="pid"
-            name="Package ID"
+            name="pid"
             label="PID"
             fullWidth
             autoComplete="given-name"
             variant="standard"
           />
-          <TextField required id="nic" name="nic" label="Package Name" fullWidth autoComplete="given-name" variant="standard" />
-          <TextField type="date" fullWidth id="date" label="Package Dispatched Date"  variant="standard" />
+          <RHFTextField required  name="pkgName" label="Package Name" fullWidth autoComplete="given-name" variant="standard" />
+          {/* <TextField type="date" fullWidth id="date" label="Package Dispatched Date"  variant="standard" /> */}
           
           
         </Grid>
