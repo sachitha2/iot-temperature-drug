@@ -2,6 +2,8 @@ import * as Yup from 'yup';
 import {useAtom} from 'jotai';
 import { useState } from 'react';
 import { Link as RouterLink,useNavigate } from 'react-router-dom';
+import { signInWithEmailAndPassword } from "firebase/auth";
+
 // form
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -9,6 +11,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Link, Stack, IconButton, InputAdornment } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 // components
+import { AUTH } from "../../../firebase";
 import Iconify from '../../../components/Iconify';
 import { FormProvider, RHFTextField, RHFCheckbox } from '../../../components/hook-form';
 // eslint-disable-next-line import/named
@@ -29,8 +32,8 @@ export default function LoginForm() {
 
   const defaultValues = {
     // phid: '',
-    email: 'dd2@g.com',
-    password: 'patient123',
+    email: 'samwilson@gmail.com',
+    password: '12345678',
     remember: true,
   };
 
@@ -47,19 +50,21 @@ export default function LoginForm() {
   const onSubmit = async (values) => {
     // TODO axios here
     console.log(values)
-    try{
-        const response = await axios.post('auth/login',{
-        email: values.email,
-        password: values.password
-      });
-      
-      console.log(response.data)
-      setLoginData(response.data)
-      navigate('/dashboard/doctor', { replace: true });
-    }catch(e){
-      console.log(e)
-      alert(e)
-    }
+    signInWithEmailAndPassword(AUTH, values.email, values.password)
+  .then((userCredential) => {
+    // Signed in 
+    const user = userCredential.user;
+    navigate('/dashboard', { replace: true });
+    console.log(userCredential);
+    const logData  = {id:userCredential.user.id,token:userCredential.user.id,userType:'ADMIN'}
+    setLoginData(logData)
+    // ...
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    alert(error.message);
+  });
   };
 
   return (
@@ -87,8 +92,8 @@ export default function LoginForm() {
 
       <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ my: 2 }}>
         {/* <RHFCheckbox name="remember" label="Remember me" /> */}
-        <Link variant="subtitle2" underline="hover" component={RouterLink} to="/login">
-          Change Role
+        <Link variant="subtitle2" underline="hover" component={RouterLink} to="/register">
+          Register
         </Link>
       </Stack>
 

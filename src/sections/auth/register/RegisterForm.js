@@ -1,7 +1,7 @@
 import * as Yup from 'yup';
 import { useState } from 'react';
 import {useAtom} from 'jotai';
-import { useNavigate } from 'react-router-dom';
+import { Link as RouterLink,useNavigate } from 'react-router-dom';
 import {
   createUserWithEmailAndPassword,
 } from "firebase/auth";
@@ -10,7 +10,7 @@ import { AUTH } from "../../../firebase";
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 // @mui
-import { Stack, IconButton, InputAdornment } from '@mui/material';
+import { Link,Stack, IconButton, InputAdornment } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 // components
 import Iconify from '../../../components/Iconify';
@@ -49,7 +49,6 @@ export default function RegisterForm() {
   } = methods;
   const [logindata,setLoginData] = useAtom(loginData);
   const onSubmit = async (values) => {
-    alert('on submit')
     
     createUserWithEmailAndPassword(AUTH, values.email, values.password)
       .then((userCredential) => {
@@ -90,11 +89,17 @@ export default function RegisterForm() {
             ),
           }}
         />
-
+        <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ my: 2 }}>
+        {/* <RHFCheckbox name="remember" label="Remember me" /> */}
+        <Link variant="subtitle2" underline="hover" component={RouterLink} to="/login">
+          Login
+        </Link>
+      </Stack>
         <LoadingButton fullWidth size="large" type="submit" variant="contained" loading={isSubmitting}>
           Register
         </LoadingButton>
       </Stack>
+      
     </FormProvider>
   );
 }
