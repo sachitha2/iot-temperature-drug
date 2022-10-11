@@ -2,7 +2,7 @@ import * as Yup from 'yup';
 import { useAtom } from 'jotai';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { collection, addDoc } from "firebase/firestore"; 
+import { collection, addDoc,setDoc,doc } from "firebase/firestore"; 
 // form
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -37,13 +37,11 @@ import axios from '../utils/axios';
 
 export default function AddPatient() {
   const LoginSchema = Yup.object().shape({
-    pid: Yup.string().required('Email is required'),
-    pkgName: Yup.string().required('Package Name is required'),
+    pid: Yup.string().required('Email is required')
   });
 
   const defaultValues = {
-    pid: '',
-    pkgName:''
+    pid: ''
   };
 
   const methods = useForm({
@@ -56,20 +54,43 @@ export default function AddPatient() {
     formState: { isSubmitting },
   } = methods;
   const onSubmit = async (values) => {
+    var temp = 0;
+    try {
+      const response = await axios.get(`http://192.168.205.130/`
+      // const response = await axios.get(`https://api.npoint.io/46e69e6d6546aba07194`
+      );
+      console.log(response.data)
+      temp = response.data.temperature;
+
+
+    } catch (error) {
+      console.log(error);
+    }
+
+    if(temp != null){
+
+    
 
     try {
-      const docRef = await addDoc(collection(DB, "packages"), {
+      // 
+
+      
+      await setDoc(doc(DB, "packages",values.pid), {
         pid: values.pid,
-        pkgName: values.pkgName,
+        timestamp: new Date()
       });
-      console.log("Document written with ID: ", docRef.id);
+      console.log("Document written with ID: ", values.pid);
+
+      const docRefTemp = await addDoc(collection(DB, `packages/${values.pid}/temp`), {
+        temp: temp
+      });
+
+      console.log("Document written with ID: ", docRefTemp);
     } catch (e) {
       alert(e)
       console.error("Error adding document: ", e);
     }
-    // TODO axios here
-    console.log(values);
-    
+  }
   };
 
   return (
@@ -78,7 +99,7 @@ export default function AddPatient() {
       <Grid container xs={6} spacing={3}>
         <Grid item xs={12} spacing={3} padding={3}>
           <Typography variant="h3" gutterBottom>
-            Add a Package
+            Scan a Package
           </Typography>
           <RHFTextField
             // disabled
@@ -89,13 +110,11 @@ export default function AddPatient() {
             autoComplete="given-name"
             variant="standard"
           />
-          <RHFTextField required  name="pkgName" label="Package Name" fullWidth autoComplete="given-name" variant="standard" />
-          {/* <TextField type="date" fullWidth id="date" label="Package Dispatched Date"  variant="standard" /> */}
           
           
         </Grid>
         <LoadingButton fullWidth size="large" type="submit" variant="contained" loading={isSubmitting}>
-            Save Package Details
+            Scan Package Temperature
         </LoadingButton>
       </Grid>
       
