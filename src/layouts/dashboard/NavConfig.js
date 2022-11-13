@@ -26,6 +26,11 @@ const navConfig = [
     path: '/dashboard/doc-scan',
     icon: getIcon('eva:people-fill'),
   },
+  {
+    title: 'Document Scan',
+    path: '/dashboard/table',
+    icon: getIcon('eva:people-fill'),
+  },
   
   // {
   //   title: 'Demographic',

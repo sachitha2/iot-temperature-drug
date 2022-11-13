@@ -11,6 +11,7 @@ import AddAPackage from './pages/AddAPackage';
 import Scan from './pages/Scan';
 import DocSan from './pages/DocScan';
 import Packages from './pages/Packages';
+import CollapsibleTable from './pages/CollapsibleTable';
 
 // ----------------------------------------------------------------------
 
@@ -25,6 +26,7 @@ export default function Router() {
         { path: 'packages', element: <Packages /> },
         { path: 'scan', element: <Scan /> },
         { path: 'doc-scan', element: <DocSan /> },
+        { path: 'table', element: <CollapsibleTable /> },
       ],
     },
     {
