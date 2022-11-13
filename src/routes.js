@@ -12,6 +12,7 @@ import Scan from './pages/Scan';
 import DocSan from './pages/DocScan';
 import Packages from './pages/Packages';
 import CollapsibleTable from './pages/CollapsibleTable';
+import SignatureVerify from './pages/SignatureVerify';
 
 // ----------------------------------------------------------------------
 
@@ -27,6 +28,7 @@ export default function Router() {
         { path: 'scan', element: <Scan /> },
         { path: 'doc-scan', element: <DocSan /> },
         { path: 'table', element: <CollapsibleTable /> },
+        { path: 'sign-verify', element: <SignatureVerify/> },
       ],
     },
     {

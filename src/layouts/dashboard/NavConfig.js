@@ -27,6 +27,11 @@ const navConfig = [
     icon: getIcon('eva:people-fill'),
   },
   {
+    title: 'Signature Verify',
+    path: '/dashboard/sign-verify',
+    icon: getIcon('eva:people-fill'),
+  },
+  {
     title: 'Document Scan',
     path: '/dashboard/table',
     icon: getIcon('eva:people-fill'),
