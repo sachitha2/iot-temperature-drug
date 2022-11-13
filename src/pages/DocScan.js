@@ -3,6 +3,7 @@ import { useAtom } from 'jotai';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { collection, addDoc,setDoc,doc } from "firebase/firestore"; 
+import { DataGrid } from '@mui/x-data-grid';
 // form
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -35,7 +36,17 @@ import { FormProvider, RHFTextField } from '../components/hook-form';
 import axios from '../utils/axios';
 // material
 
+
+const columns = [
+  { field: 'id', headerName: 'ID', width: 70 },
+  { field: 'itemname', headerName: 'Item Name', width: 130 },
+  { field: 'amount', headerName: 'Amount', width: 130 },
+];
+
 export default function DocScan() {
+
+  const [itemList,setItemList] = useState([])
+
   const LoginSchema = Yup.object().shape({
     pid: Yup.string().required('Email is required')
   });
@@ -66,59 +77,60 @@ export default function DocScan() {
     } catch (error) {
       console.log(error);
     }
-
-    if(temp != null){
-
-    
-
-    try {
-      // 
-
-      
-      await setDoc(doc(DB, "packages",values.pid), {
-        pid: values.pid,
-        timestamp: new Date()
-      });
-      console.log("Document written with ID: ", values.pid);
-
-      const docRefTemp = await addDoc(collection(DB, `packages/${values.pid}/temp`), {
-        temp: temp
-      });
-
-      console.log("Document written with ID: ", docRefTemp);
-    } catch (e) {
-      alert(e)
-      console.error("Error adding document: ", e);
-    }
-  }
   };
 
+  const onChange = (e) => {
+    let url = "http://35.195.248.108:8000/upload";
+    let file = e.target.files[0];
+    uploadFile(url, file);
+  };
+  
+  const uploadFile = (url, file) => {
+    let formData = new FormData();
+    formData.append("file", file);
+    axios.post(url, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }).then((response) => {
+        console.log(response.data.message)
+        var size = Object.keys(response.data.message).length;
+
+
+        var numData = Object.keys(response.data.message[0]).length;
+        let n = 1;
+        let dataSet = []
+        while(n < numData){
+          let dataItem = {}
+          dataItem.id = response.data.message[0][n]
+          dataItem.itemname = response.data.message[1][n]
+          dataItem.amount = response.data.message[2][n]
+          console.log(dataItem)
+          dataSet.push(dataItem)
+          n++
+        }
+
+        console.log(dataSet)
+        setItemList(dataSet)
+        // fnSuccess(response);
+      }).catch((error) => {
+        console.log(error)
+        // fnFail(error);
+      });
+  };
   return (
     <>
-    <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
-      <Grid container xs={6} spacing={3}>
-        <Grid item xs={12} spacing={3} padding={3}>
-          <Typography variant="h3" gutterBottom>
-            Scan a Package
-          </Typography>
-          <RHFTextField
-            // disabled
-            required
-            name="pid"
-            label="PID"
-            fullWidth
-            autoComplete="given-name"
-            variant="standard"
-          />
-          
-          
-        </Grid>
-        <LoadingButton fullWidth size="large" type="submit" variant="contained" loading={isSubmitting}>
-            Scan Package Temperature
-        </LoadingButton>
-      </Grid>
-      
-      </FormProvider>
+    <input type="file" onChange={onChange} accept ="image/*"/>
+    <div style={{ height: '100vh', width: '100%' }}>
+      <DataGrid
+        rows={itemList}
+        columns={columns}
+        pageSize={20}
+        rowsPerPageOptions={[5]}
+        checkboxSelection
+      />
+    </div>
+    
     </>
   );
 }
