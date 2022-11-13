@@ -56,8 +56,8 @@ export default function AddPatient() {
   const onSubmit = async (values) => {
     var temp = 0;
     try {
-      const response = await axios.get(`http://192.168.205.130/`
-      // const response = await axios.get(`https://api.npoint.io/46e69e6d6546aba07194`
+      // const response = await axios.get(`http://192.168.205.130/`
+      const response = await axios.get(`https://api.npoint.io/46e69e6d6546aba07194`
       );
       console.log(response.data)
       temp = response.data.temperature;
