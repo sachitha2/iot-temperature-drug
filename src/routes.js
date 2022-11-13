@@ -9,6 +9,7 @@ import Products from './pages/Products';
 import DashboardApp from './pages/DashboardApp';
 import AddAPackage from './pages/AddAPackage';
 import Scan from './pages/Scan';
+import DocSan from './pages/DocScan';
 import Packages from './pages/Packages';
 
 // ----------------------------------------------------------------------
@@ -23,6 +24,7 @@ export default function Router() {
         { path: 'addAPackage', element: <AddAPackage /> },
         { path: 'packages', element: <Packages /> },
         { path: 'scan', element: <Scan /> },
+        { path: 'doc-scan', element: <DocSan /> },
       ],
     },
     {

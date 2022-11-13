@@ -35,7 +35,7 @@ import { FormProvider, RHFTextField } from '../components/hook-form';
 import axios from '../utils/axios';
 // material
 
-export default function Scan() {
+export default function AddPatient() {
   const LoginSchema = Yup.object().shape({
     pid: Yup.string().required('Email is required')
   });
