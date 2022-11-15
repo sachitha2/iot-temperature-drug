@@ -75,7 +75,13 @@ export default function SignatureVerify() {
         console.log(response.data)
         setIsLoading(false)
         const myArray = response.data.message.result.split(" ");
-        setResult(myArray[1])
+        if(myArray[1] === "Correct\n"){
+          setResult("This document is verified")
+        }else{
+          setResult("This document is not verified")
+        }
+        console.log(myArray[1])
+        
         // setImageSrc(response.data.message.image)
         // setItemList(dataSet)
         // fnSuccess(response);
