@@ -31,11 +31,11 @@ const navConfig = [
     path: '/dashboard/sign-verify',
     icon: getIcon('eva:people-fill'),
   },
-  {
-    title: 'Document Scan',
-    path: '/dashboard/table',
-    icon: getIcon('eva:people-fill'),
-  },
+  // {
+  //   title: 'Document Scan',
+  //   path: '/dashboard/table',
+  //   icon: getIcon('eva:people-fill'),
+  // },
   
   // {
   //   title: 'Demographic',
