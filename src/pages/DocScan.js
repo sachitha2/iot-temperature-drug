@@ -29,11 +29,13 @@ import {
   Link,
   IconButton,
   InputAdornment,
+  CircularProgress
 } from '@mui/material';
 import { DB } from "../firebase";
 import Iconify from '../components/Iconify';
 import { FormProvider, RHFTextField } from '../components/hook-form';
 import axios from '../utils/axios';
+import { set } from 'lodash';
 // material
 
 
@@ -46,6 +48,7 @@ const columns = [
 export default function DocScan() {
 
   const [itemList,setItemList] = useState([])
+  const [isLoading,setIsLoading] = useState(false)
 
   const LoginSchema = Yup.object().shape({
     pid: Yup.string().required('Email is required')
@@ -82,6 +85,7 @@ export default function DocScan() {
   const onChange = (e) => {
     let url = "http://35.195.248.108:8000/upload";
     let file = e.target.files[0];
+    setIsLoading(true)
     uploadFile(url, file);
   };
   
@@ -93,6 +97,7 @@ export default function DocScan() {
           "Content-Type": "multipart/form-data",
         },
       }).then((response) => {
+        setIsLoading(false)
         console.log(response.data.message)
         var size = Object.keys(response.data.message).length;
 
@@ -114,6 +119,7 @@ export default function DocScan() {
         setItemList(dataSet)
         // fnSuccess(response);
       }).catch((error) => {
+        setIsLoading(false)
         console.log(error)
         // fnFail(error);
       });
@@ -121,6 +127,7 @@ export default function DocScan() {
   return (
     <>
     <input type="file" onChange={onChange} accept ="image/*"/>
+    {isLoading ? <CircularProgress /> : null}
     <div style={{ height: '100vh', width: '100%' }}>
       <DataGrid
         rows={itemList}
